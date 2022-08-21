@@ -1,10 +1,9 @@
 import csv
 
-from requests import head
-
 dataset_1 = []
 dataset_2 = []
 
+#encoding can translate unique code character to a matching unique binary string
 with open('dwarf_stars.csv', 'r') as f:
     csvreader = csv.reader(f)
     for row in csvreader:
@@ -24,14 +23,21 @@ headers_2.append(dataset_2[0])
 star_data_2 = dataset_2[1:]
 
 headers = headers_1 + headers_2
+
+#solar_radius = dataset_1[3] * int(0.102763)
+#solar_mass = dataset_1[2] * int(0.000954588)
+
+#headers_1.append(solar_mass + solar_radius)
 star_data = []
 
-solar_radius = float(dataset_1[3] * 0.102763)
-solar_mass = float(dataset_1[2] * 0.000954588)
+for i in star_data_1:
+    star_data.append(i)
 
-headers_1.append(solar_mass, solar_radius)
-for index, data_row in enumerate(star_data_1):
-    star_data.append(star_data_1[index]+star_data_2[index])
+for j in star_data_2:
+    star_data.append(i)
+
+#for index, data_row in enumerate(star_data_1):
+    #star_data.append(star_data_1[index]+star_data_2[index])
 
 with open('merge_dataset.csv', "a+") as f:
     csvwriter = csv.writer(f)
